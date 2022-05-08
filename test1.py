@@ -14,7 +14,7 @@ from selenium.webdriver.support.ui import Select
 
 def main():
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     driver.maximize_window()
 
@@ -28,29 +28,30 @@ def main():
 
     cb1 = "/html/body/section[2]/div[1]/div[2]/div/div/div[1]/div[1]/select"
 
-    dropdown = Select(driver.find_element((By.XPATH,cb1)))
+    dropdown = Select(driver.find_element(By.XPATH,cb1))
 
     dropdown.select_by_index(2)
 
     cb2 = '/html/body/section[2]/div[1]/div[2]/div/div/div[1]/div[2]/select'
 
-    dropdown2 = Select(driver.find_element((By.XPATH, cb2)))
+    dropdown2 = Select(driver.find_element(By.XPATH, cb2))
 
     dropdown2.select_by_index(2)
 
     cb3 = '/html/body/section[2]/div[1]/div[2]/div/div/div[1]/div[3]/select'
 
-    dropdown3 = Select(driver.find_element((By.XPATH, cb3)))
+    dropdown3 = Select(driver.find_element(By.XPATH, cb3))
 
     dropdown3.select_by_index(2)
 
     result = '/html/body/section[2]/div[1]/div[2]/div/div/div[3]/div[3]'
 
-    WebDriverWait(driver, 20).until(ec.presence_of_element_located((By.XPATH, result)))
+    r = WebDriverWait(driver, 20).until(ec.presence_of_element_located((By.XPATH, result)))
 
-    print(result.text)
+    print(r.text)
 
-    assert result == "There are no results that match your criteria. Don't worry, we have some interesting offers..."
+    assert r.text == "There are no results that match your criteria. Don't worry, we have some interesting offers..."
+
 
 
 
